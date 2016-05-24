@@ -27,7 +27,7 @@
 		<script>
 //			var inps = document.getElementsByTagName('input');
 //			var divs = document.getElementsByTagName('div');
-			//方法一:定点清除选项卡
+			/////方法一:定点清除选项卡
 //			var last = inps[0];//把上一个点击按钮存起来
 //			for(var i=0;i<inps.length;i++){//循环每一个要点击的按钮
 //				inps[i].index = i;//为所有的input添加自定义属性
@@ -39,7 +39,8 @@
 //					last = this;//把点击的按钮记录下来设置为上一个
 //				}
 //			}
-			//方法二:大清洗的方法
+
+			/////方法二:大清洗的方法
 //			for(var i=0;i<inps.length;i++){
 //				inps[i].index = i;
 //				inps[i].onclick = function(){
@@ -51,10 +52,37 @@
 //					divs[this.index].style.display = 'block';
 //				}
 //			}
-		$('input').click(function(){
-			$(this).css('background','yellow').siblings().css('background','');
-			$('div').css('display','none').eq($(this).index()).css('display','block')
-		})
+			/////方法三:jquery写法
+//		$('input').click(function(){
+//			$(this).css('background','yellow').siblings().css('background','');
+//			$('div').css('display','none').eq($(this).index()).css('display','block')
+//		})
+
+			/////方法四:面向对象写选项卡
+			function Tab(){
+				this.aInput = document.getElementsByTagName('input');
+				this.aDiv = document.getElementsByTagName('div');
+			}
+			Tab.prototype.init = function(){
+				var _this = this;
+				for (var i = 0; i < this.aInput.length; i++) {
+					this.aInput[i].index = i;
+					this.aInput[i].onclick = function(){
+						_this.change(this);
+					}
+				}
+			};
+			Tab.prototype.change = function(_this){
+				
+				for (var i = 0; i < this.aInput.length; i++) {
+					this.aInput[i].style.background = '';
+					this.aDiv[i].style.display = 'none';
+				}
+				_this.style.background = 'yellow';
+				this.aDiv[_this.index].style.display="block";
+			};
+			var p = new Tab();
+			p.init();
 		</script>
 	</body>
 </html>
