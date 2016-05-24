@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background:red;
+				display:none;
+				margin-top:50px;
+				color:#fff;
+				font:bold 100px/100px "微软雅黑";
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="按钮1"/>
+		<input type="button" value="按钮2"/>
+		<input type="button" value="按钮3"/>
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<script src="jquery-2.2.2.min.js"></script>
+		<script>
+//			var inps = document.getElementsByTagName('input');
+//			var divs = document.getElementsByTagName('div');
+			//方法一:定点清除选项卡
+//			var last = inps[0];//把上一个点击按钮存起来
+//			for(var i=0;i<inps.length;i++){//循环每一个要点击的按钮
+//				inps[i].index = i;//为所有的input添加自定义属性
+//				inps[i].onclick = function(){
+//					last.style.background = '';//上一个的背景颜色清空
+//					divs[last.index].style.display = 'none';//上一个的对应点击按钮的div隐藏
+//					this.style.background = 'yellow';//点击的当前的按钮背景改变颜色
+//					divs[this.index].style.display = 'block';//点击的当前的按钮对应的div显示
+//					last = this;//把点击的按钮记录下来设置为上一个
+//				}
+//			}
+			//方法二:大清洗的方法
+//			for(var i=0;i<inps.length;i++){
+//				inps[i].index = i;
+//				inps[i].onclick = function(){
+//					for(var i=0;i<inps.length;i++){
+//						inps[i].style.background = '';
+//						divs[i].style.display = 'none';
+//					}
+//					this.style.background = 'yellow';
+//					divs[this.index].style.display = 'block';
+//				}
+//			}
+		$('input').click(function(){
+			$(this).css('background','yellow').siblings().css('background','');
+			$('div').css('display','none').eq($(this).index()).css('display','block')
+		})
+		</script>
+	</body>
+</html>
